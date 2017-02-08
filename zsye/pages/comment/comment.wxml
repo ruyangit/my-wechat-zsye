@@ -1,0 +1,32 @@
+<view class="container">
+    <view class="headline">
+        <text>热门评论</text>
+    </view>
+
+    <view class="common-list">
+        <block wx:for="{{commentData}}" wx:key="item">
+            <view class="list-item has-img" data-id="{{item.acskey}}">
+                <view class="content">
+                    <view class="header">
+                        <text class="title">{{item.babyaname}}</text>
+                        <!--<image class="vote" src="../../images/thumb_up.png" />-->
+                    </view>
+                    <text class="body">{{item.recontent}}</text>
+                    <text class="bottom">{{item.adddate}}</text>
+                </view>
+                <image wx:if="{{item.spicurl}}" src="https://wx.zsye.com/zhangy{{item.spicurl}}" class="cover" />
+                <image wx:else src="../../images/splash-logo.png" class="cover" />
+            </view>  
+        </block>
+    </view>
+
+
+</view>
+
+<toast hidden="{{toastHidden}}" duration="2000" bindchange="toastChangeEvent">
+    {{toastMsg}}
+</toast>
+
+<loading hidden="{{!loading}}">
+    {{loadingMsg}}
+</loading>

@@ -1,0 +1,8 @@
+.weui-media-box__thumb {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 10%;
+}
+.weui-media-box__bd{
+    margin-left: 35rpx;
+}

@@ -1,0 +1,20 @@
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__hd">账户信息</view>
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_appmsg">
+      <view class="weui-media-box__hd">
+        <image class="weui-media-box__thumb" src="{{avatarUrl}}" />
+      </view>
+      <view class="weui-media-box__bd">
+        <view class="weui-media-box__title">微信号</view>
+        <view class="weui-media-box__desc">{{nickName}}</view>
+      </view>
+    </view>
+  </view>
+  <!--<view class="weui-panel__ft">
+    <navigator url="/pages/baby/setting/setting" open-type="redirect" class="weui-cell weui-cell_access weui-cell_link">
+      <view class="weui-cell__bd">查看更多</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>-->
+</view>

@@ -1,0 +1,74 @@
+.headline {
+    font-size: 30rpx;
+    padding: 30rpx 40rpx;
+    border-bottom: 1px solid #EEE;
+}
+
+/*common list*/
+.common-list .list-item {
+  position: relative;
+  border-bottom: 1px solid #EEE;
+  padding: 20rpx;
+  min-height: 150rpx;
+  overflow: hidden;
+}
+.common-list .list-item:active {
+ 	background: #FAFAFA;
+}
+.common-list .list-item.has-img image.cover {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  width: 150rpx;
+  height: 150rpx;
+}
+.common-list .list-item.has-img .content {
+  margin-left: 180rpx;
+}
+.common-list .list-item .content text {
+  font-size: 35rpx;
+}
+
+.common-list .list-spliter {
+  font-size: 30rpx;
+  background: #EEE;
+  padding: 20rpx;
+  color: #555
+}
+
+
+.common-list .list-item.has-img image.cover {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+.common-list .list-item.has-img .content {
+    margin-left: 140rpx;
+    margin-right: 20rpx;
+}
+.common-list .header {
+    position: relative;
+}
+.common-list .header .vote {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40rpx;
+    height: 40rpx;
+}
+.common-list .header .title {
+    font-weight: bold;
+}
+.common-list .body {
+    display: block;
+    margin-top: 20rpx;
+    color: #333;
+    text-align: justify;
+    line-height: 55rpx;
+}
+.common-list .bottom {
+    display: block;
+    margin-top: 20rpx;
+    font-size: 20rpx;
+    color: #CCC;
+}

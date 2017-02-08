@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/comment/comment",
+    "pages/detail/detail",
+    "pages/music/music",
+    "pages/baby/setting/setting",
+    "pages/activity/activity"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#DB408C",
+    "navigationBarTitleText": "掌上育儿",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#888",
+    "selectedColor": "#DB408C",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "必读",
+      "iconPath": "images/fca.png",
+      "selectedIconPath": "images/fca_a.png"
+    }, {
+      "pagePath": "pages/music/music",
+      "text": "故事",
+      "iconPath": "images/fcc.png",
+      "selectedIconPath": "images/fcc_a.png"
+    }]
+  }
+}

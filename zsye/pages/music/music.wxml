@@ -1,0 +1,58 @@
+<view class="container">
+  <swiper class="musics-swiper">
+    <block wx:for="{{musics}}" wx:key="id" wx:for-index="idx">
+      <swiper-item class="musics-swiper-item">
+        <scroll-view class="music" scroll-y="true">
+          <view class="music-container">
+            <view class="music-cover">
+              <image class="music-cover-image" src="https://wx.zsye.com/zhangy{{item.spicurl}}" mode="aspectFill"></image>
+            </view>
+            <view class="music-control">
+              <view class="music-author">
+                <image class="music-author-avatar" src="https://wx.zsye.com/zhangy{{item.spicurl}}" mode="aspectFill"></image>
+                <view class="music-author-username">
+                  <text>{{item.title}}</text>
+                </view>
+                <view class="music-author-desc">
+                  <text>时长：{{item.filelength}}</text>
+                  <text>, 大小：{{item.filesize}}</text>
+                </view>
+              </view>
+              <view class="music-play" bindtap="togglePlay">
+                <image class="music-play-control" src="{{item.playImg}}" data-id="{{item.acskey}}"></image>
+              </view>
+              <view class="music-title">
+                <text>{{item.title}}</text>
+              </view>
+              <view class="music-maketime">
+                <text>管理员发布</text>
+              </view>
+            </view>
+            <view class="music-content">
+              <view class="music-lyric">
+                <view class="music-content-header">
+                  <text class="content-label">育儿故事</text>
+                  <view class="content-links">
+                    <image class="link" src="../../images/music_story_default.png" mode="aspectFill" data-type="story"></image>
+                  </view>
+                </view>
+                <view class="music-content-body">
+                  <view class="lyric-content">
+                    <text>{{item.content}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+
+        <!--<template is="music-item" data="{{item: item}}" />-->
+      </swiper-item>
+    </block>
+
+    <!--<swiper-item></swiper-item>-->
+  </swiper>
+  <loading hidden="{{!loading}}">
+    {{loadingMsg}}
+  </loading>
+</view>

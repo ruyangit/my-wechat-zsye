@@ -1,0 +1,91 @@
+@import 'weui.wxss';
+
+page {
+  position: relative;
+  height: 100%;
+  font-family: 'microsoft yahei ui';
+}
+
+.m-bg{
+  background-color:#DB408C;
+  color:white;
+}
+
+swiper.index-swiper {
+  position: relative;
+
+}
+
+swiper .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+swiper image {
+  display: block;
+  width: 100%;
+}
+
+swiper .desc {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 20rpx 20rpx 50rpx 20rpx;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.float-action {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+  box-shadow: 2px 2px 10px #aaa;
+  background: #DB408C;
+  z-index: 100;
+}
+
+
+.refresh-block {
+  padding: 20rpx;
+  text-align: center;
+}
+
+.refresh-block image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.share-list .item {
+  display: inline-block;
+  width: 33.33333%;
+  text-align: center;
+}
+
+.share-list .item image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.btn {
+  width: 90%;
+  background: #db408c;
+  color: #fff;
+}

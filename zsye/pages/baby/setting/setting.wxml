@@ -1,0 +1,44 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__image-center">
+    <image class="weui-media-box__thumb" src="{{babyAvatarUrl}}" />
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips-c"  wx:if="{{showTopTips}}">请输入宝宝爱称</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">宝宝爱称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入宝宝爱称" value="{{babyNickName}}" bindinput="bindKeyInput" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">宝宝生日</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{babyDateValue}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="weui-input">{{babyDateValue}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">宝宝性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindSexChange" value="{{babySexIndex}}" range="{{babySexNames}}" >
+            <view class="weui-select weui-select_in-select-after">{{babySexNames[babySexIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell"/>
+    </view>
+
+    <!--<view class="weui-cells__tips">底部说明文字底部说明文字</view>-->
+    <view class="weui-btn-area">
+      <button class="weui-btn m-bg" type="default"  bindtap="btnStart">确定</button>
+    </view>
+  </view>
+</view>
