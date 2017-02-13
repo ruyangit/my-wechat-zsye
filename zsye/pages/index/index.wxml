@@ -1,49 +1,71 @@
+<view class="container">
 
-<!--<view class="float-action" bindtap="ballClickEvent" style="opacity: {{ballOpacity}};bottom:{{ballBottom}}px;right:{{ballRight}}px;">
+  <!--<view class="float-action" bindtap="ballClickEvent" style="opacity: {{ballOpacity}};bottom:{{ballBottom}}px;right:{{ballRight}}px;">
   <image style="width:32px;height:32px;padding:8px;" mode="" src="../../images/baby.png"></image>
 </view>-->
-
-<!--<view class="slide-mask" style="display:{{maskDisplay}}">
-  <view class="page">
-    <view style="padding: 40px;">
-      <view class="page__title">{{currentDateStr}}</view>
-      <view class="page__desc">更懂你的育儿管家</view>
-    </view>
-    <view class="page__bd">
-      <view class="weui-grids">
-        
-        <navigator url="/pages/setting/setting" class="weui-grid" hover-class="weui-grid_active">
-          <image class="weui-grid__icon" src="../../images/mk2.png" />
-          <view class="weui-grid__label">用户信息</view>
-        </navigator>
-         
-        <view  class="weui-grid" hover-class="weui-grid_active">
-          <image class="weui-grid__icon" src="../../images/mk1.png" bindtap="onClickMsgNo"/>
-          <view class="weui-grid__label">宝宝背囊</view>
-        </view>
-       <view  class="weui-grid" hover-class="weui-grid_active">
-          <image class="weui-grid__icon" src="../../images/mk3.png" bindtap="onClickMsgNo"/>
-          <view class="weui-grid__label">宝宝发现</view>
+  <view class="slide-mask" style="display:{{maskDisplay}}" bindtap="slideCloseEvent">
+    <view class="page">
+      <view style="padding: 40px 40px 20px 40px;">
+        <view class="page__title">{{currentDateStr}}</view>
+        <view class="page__desc">更懂你的育儿管家</view>
+      </view>
+      <view class="page__bd">
+        <view class="weui-panel weui-panel_access">
+          <view class="weui-panel__hd">勋章介绍</view>
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box-m weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb weui-grid__icon" src="../../images/R_01.png" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">初出茅庐</view>
+                <view class="weui-media-box__desc">阅读，发现更大世界</view>
+              </view>
+            </view>
+            <view class="weui-media-box weui-media-box-m weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb weui-grid__icon" src="../../images/R_02.png" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">略有所成</view>
+                <view class="weui-media-box__desc">领悟，有所发现，有所收获</view>
+              </view>
+            </view>
+            <view class="weui-media-box weui-media-box-m weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb weui-grid__icon" src="../../images/R_03.png" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">通今博古</view>
+                <view class="weui-media-box__desc">兼且通今博古，出口成文</view>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
     </view>
-    <view class="main-bottom-mk">
-     <image class="main-bottom-mk-x" src="../../images/x.png"  bindtap="slideCloseEvent" />
-    </view>
   </view>
-</view>-->
-<scroll-view wx:if="{{themeId==0}}" scroll-y="true" style="height:100%;width:100%;display:{{pageShow}}" bindscrolltolower="loadingMoreEvent">
-  <swiper class="index-swiper" indicator-dots="true" interval="10000" autoplay="true">
-    <block wx:key="id" wx:for="{{sliderData}}">
-      <swiper-item data-id="{{item.acskey}}" bindtap="toBannerPage">
-        <image mode="" src="{{item.picUrl}}" style="width:100%;height:100%;" />
-        <!--<view class="mask"></view>
+  <view class="swiper-container">
+    <swiper autoplay="auto" interval="5000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
+      <block wx:key="unique" wx:for="{{sliderData}}">
+        <swiper-item data-id="{{item.acskey}}" bindtap="toBannerPage">
+          <image mode="" src="{{item.picUrl}}" style="width:100%;height:100%;" />
+
+          <!--<view class="mask"></view>
         <view class="desc">
           <text>{{item.subject}}</text>
         </view>-->
-      </swiper-item>
-    </block>
-  </swiper>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">
+      <block wx:for="{{sliderData}}" wx:key="unique">
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!--<scroll-view scroll-y="true" style="height:100%;width:100%;" bindscrolltolower="loadingMoreEvent">-->
 
   <!--<view class="main-list-header">
     <view class="title">
@@ -54,16 +76,24 @@
     </view>
   </view>-->
   <view class="weui-panel__bd">
-    <navigator url="/pages/baby/setting/setting" class="weui-media-box weui-media-box_appmsg">
-      <view class="weui-media-box__hd">
-        <image wx:if="{{avatarUrl}}" class="weui-media-box__thumb " style="width:92rpx;height:92rpx;margin-right:10px;border-radius: 10%;" src="{{avatarUrl}}"></image>
-        <image wx:else class="weui-media-box__thumb " style="width:92rpx;height:92rpx;margin-right:10px;border-radius: 10%;" src="../../images/splash-logo.png"></image>
+    <view class="weui-media-box weui-media-box_appmsg">
+      <view class="weui-media-box__hd" bindtap="toSettingPage">
+        <image wx:if="{{babyAvatarUrl}}" class="weui-media-box__thumb " style="width:92rpx;height:92rpx;margin-right:10px;border-radius: 10%;" src="{{babyAvatarUrl}}"></image>
+        <image wx:else class="weui-media-box__thumb " style="width:92rpx;height:92rpx;margin-right:10px;border-radius: 10%;" src="../../images/splash-logo.png" />
       </view>
-      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" bindtap="toSettingPage">
         <view class="weui-media-box__title" style="font-weight:700;">{{currentDateStr}}</view>
-        <view class="weui-media-box__desc">宝宝 {{babyAgeDate}}</view>
+        <view class="weui-media-box__desc">
+          <text>宝宝 </text>
+          <text wx:if="{{babyAgeDate=='1天'}}">已出生</text>
+          <text wx:else>{{babyAgeDate}}</text>
+        </view>
       </view>
-    </navigator>
+      <view style="margin-right:15px;text-align:center;" bindtap="ballClickEvent">
+        <image src="../../images/R_01.png" style="width:28px;height:28px;"></image>
+        <view class="weui-media-box__desc">初出茅庐</view>
+      </view>
+    </view>
     <view class="weui-media-box weui-media-box_appmsg">
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
         <view class="weui-media-box__title">专家提醒</view>
@@ -82,12 +112,19 @@
         </block>
         <block wx:else>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" data-id="{{item.dataid}}" bindtap="toDetailPage">
-            <view class="weui-media-box__title">{{item.subject}}</view>
+            <view class="weui-media-box__title" style="font-size:15px;">{{item.subject}}</view>
 
             <!--<view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>-->
             <view class="weui-media-box__info">
               <text class="weui-media-box__info__meta">{{item.sourcename}}</text>
-              <text class="weui-media-box__info__meta">热评：{{item.commentcount}}</text>
+              <view class="weui-media-box__info__meta">
+                <image src="../../images/comment.png" style="width:20px;height:16px;position: relative;  top:-2px;"></image>
+                <text style="position: relative;  top:-5px;left:2px;">{{item.commentcount}}</text>
+              </view>
+              <view class="weui-media-box__info__meta">
+                <image src="../../images/view.png" style="width:23px;height:23px;position: relative;  top:-5px;"></image>
+                <text style="position: relative;  top:-12px;left:2px;">{{item.viewcount}}</text>
+              </view>
               <text class="weui-media-box__info__meta">{{item.datediff}}</text>
 
               <!--<view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>-->
@@ -100,7 +137,7 @@
       </view>
       <view class="weui-media-box weui-media-box_appmsg" wx:elif="{{item.picList.length>=3}}" data-id="{{item.dataid}}" bindtap="toDetailPage">
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-          <view class="weui-media-box__title">{{item.subject}}</view>
+          <view class="weui-media-box__title" style="font-size:15px;">{{item.subject}}</view>
           <view class="weui-media-box__desc">
             <view class="weui-flex">
               <view class="weui-flex__item">
@@ -116,7 +153,14 @@
           </view>
           <view class="weui-media-box__info">
             <text class="weui-media-box__info__meta">{{item.sourcename}}</text>
-            <text class="weui-media-box__info__meta">热评：{{item.commentcount}}</text>
+            <view class="weui-media-box__info__meta">
+              <image src="../../images/comment.png" style="width:20px;height:16px;position: relative;  top:-2px;"></image>
+              <text style="position: relative;  top:-5px;left:2px;">{{item.commentcount}}</text>
+            </view>
+            <view class="weui-media-box__info__meta">
+              <image src="../../images/view.png" style="width:23px;height:23px;position: relative;  top:-5px;"></image>
+              <text style="position: relative;  top:-12px;left:2px;">{{item.viewcount}}</text>
+            </view>
             <text class="weui-media-box__info__meta">{{item.datediff}}</text>
 
             <!--<view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>-->
@@ -125,10 +169,17 @@
       </view>
       <view class="weui-media-box weui-media-box_appmsg" wx:else>
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-          <view class="weui-media-box__title">{{item.subject}}</view>
+          <view class="weui-media-box__title" style="font-size:15px;">{{item.subject}}</view>
           <view class="weui-media-box__info">
             <text class="weui-media-box__info__meta">{{item.sourcename}}</text>
-            <text class="weui-media-box__info__meta">热评：{{item.commentcount}}</text>
+            <view class="weui-media-box__info__meta">
+              <image src="../../images/comment.png" style="width:20px;height:16px;position: relative;  top:-2px;"></image>
+              <text style="position: relative;  top:-5px;left:2px;">{{item.commentcount}}</text>
+            </view>
+            <view class="weui-media-box__info__meta">
+              <image src="../../images/view.png" style="width:23px;height:23px;position: relative;  top:-5px;"></image>
+              <text style="position: relative;  top:-12px;left:2px;">{{item.viewcount}}</text>
+            </view>
             <text class="weui-media-box__info__meta">{{item.datediff}}</text>
           </view>
         </view>
@@ -138,7 +189,7 @@
   <view class="refresh-block" wx:if="{{loadingMore}}">
     <image animation="{{refreshAnimation}}" src="../../images/refresh.png"></image>
   </view>
-</scroll-view>
+</view>
 <loading hidden="{{!loading}}">
   {{loadingMsg}}
 </loading>

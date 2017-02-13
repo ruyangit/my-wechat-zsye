@@ -4,7 +4,7 @@
     "pages/comment/comment",
     "pages/detail/detail",
     "pages/music/music",
-    "pages/baby/setting/setting",
+    "pages/setting/setting",
     "pages/activity/activity"
   ],
   "window": {
@@ -18,16 +18,19 @@
     "selectedColor": "#DB408C",
     "backgroundColor": "#fff",
     "borderStyle": "white",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "必读",
-      "iconPath": "images/fca.png",
-      "selectedIconPath": "images/fca_a.png"
-    }, {
-      "pagePath": "pages/music/music",
-      "text": "故事",
-      "iconPath": "images/fcc.png",
-      "selectedIconPath": "images/fcc_a.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "必读",
+        "iconPath": "images/fca.png",
+        "selectedIconPath": "images/fca_a.png"
+      },
+      {
+        "pagePath": "pages/music/music",
+        "text": "故事",
+        "iconPath": "images/fcc.png",
+        "selectedIconPath": "images/fcc_a.png"
+      }
+    ]
   }
 }

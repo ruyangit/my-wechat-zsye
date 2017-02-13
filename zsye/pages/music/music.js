@@ -39,7 +39,7 @@ Page({
     var babyData = app.globalData.babySetting;
     if (babyData.babyNickName == '' || babyData.babyDateValue == '') {
       wx.redirectTo({
-        url: '../baby/setting/setting'
+        url: '../setting/setting'
       });
     }
 
@@ -65,12 +65,9 @@ Page({
     requests.getTopStoryList(babydate, (data) => {
 
       var result = data.result;
-      console.log(result);
       for(var i=0;i<result.length;i++){
         result[i].playImg = MUSIC_PALY_IMG
       }
-      //music.playImg = MUSIC_PALY_IMG
-
       _this.setData({ musics: result })
     }, null, () => {
       _this.setData({ loading: false });

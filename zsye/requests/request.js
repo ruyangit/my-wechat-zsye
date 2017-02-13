@@ -43,7 +43,6 @@ function requestData(options, successCallback, errorCallback, completeCallback) 
 function getCommonJson(url, successCallback, errorCallback, completeCallback){
     var options = api.getBase({});
     options.url = options.url+url;
-    console.log(options);
     requestData(options, successCallback, errorCallback, completeCallback);
 }
 

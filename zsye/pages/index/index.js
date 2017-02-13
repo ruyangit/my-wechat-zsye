@@ -12,11 +12,9 @@ var app = getApp();
 
 Page({
   data: {
-    // pageData: {}, //列表数据
-    //themeData: {}, //主题菜单数据
     sliderData: [], //轮播图数据
+    swiperCurrent: 0,
     currentDateStr: '',
-    // currentDate: new Date(),
     refreshAnimation: {}, //加载更多旋转动画数据
     loadingMore: false, //是否正在加载
     avatarUrl: '',
@@ -24,8 +22,6 @@ Page({
 
     loading: false,
     loadingMsg: '加载中...',
-
-    pageShow: 'none',
 
     maskDisplay: 'none',
 
@@ -41,16 +37,11 @@ Page({
     ballRight: 30,
     ballOpacity: '.9',
     modalMsgHidden: true,
-    themeId: 0,//当前主题id
 
     id: null,
-    //pageShow: 'display',
     background: '',
     pageData: [], //列表数据源
-    // editorData: [], //主编数据
     description: '',
-    //loading: false,
-    //loadingMsg: '数据加载中...'
 
     lastid: '',
     reqdate: '',
@@ -58,12 +49,14 @@ Page({
     babysex: 0,
 
     remindData: {},
-    babyAgeDate: '宝宝健康成长'
+    babyAgeDate: '健康成长',
+    babyAvatarUrl: '',
+    babyNickName: ''
   },
   onShareAppMessage: function () {
     return {
-      title: '掌上育儿',
-      desc: '更懂你的私人育儿管家',
+      title: '更懂你的私人育儿管家',
+      // desc: '更懂你的私人育儿管家',
       path: '/pages/index/index'
     }
   },
@@ -73,13 +66,14 @@ Page({
     var _this = this;
     //检查账户信息设置
     var babyData = app.globalData.babySetting;
-    if (babyData.babyNickName == '' || babyData.babyDateValue == '') {
+    if (babyData.babyNickName == '') {
       wx.redirectTo({
-        url: '../baby/setting/setting'
+        url: '../setting/setting'
       });
     }
 
-    // console.log(goUrl);
+    _this.setData({ babyNickName: babyData.babyNickName, babyAvatarUrl: babyData.babyAvatarUrl });
+
 
     wx.getSystemInfo({
       success: function (res) {
@@ -93,9 +87,6 @@ Page({
       }
     });
 
-    app.getUserInfo(function (data) {
-      _this.setData({ avatarUrl: data.avatarUrl, nickName: data.nickName });
-    });
 
   },
 
@@ -108,18 +99,20 @@ Page({
     //     pageData: pageData
     //   })
     // }
-  },
 
+  },
   onReady: function () {
     if (app.debug) {
       console.log('onReady');
     }
+    let _this = this;
+    _this.setData({ loading: true });
+    _this.initLoadingData();
+  },
+  initLoadingData: function () {
+    let _this = this;
     var date = utils.getCurrentData();
-    // this.setData({ currentDateStr: '今天'+date.month + '月' + date.day + '日' + '星期' + weekdayStr[date.weekday] });
     this.setData({ currentDateStr: '今天' + date.month + '月' + date.day + '日' });
-
-    var _this = this;
-
 
     //请求banner信息
     requests.getCommonJson("/wxsmall/common.json", (data) => {
@@ -145,7 +138,7 @@ Page({
     let babydate = _this.data.babydate;
     let babysex = _this.data.babysex;
 
-    _this.setData({ loading: true });
+
     requests.getHomeList(lastid, reqdate, babydate, babysex, (data) => {
 
       var result = data.result;
@@ -171,7 +164,12 @@ Page({
         var dxs = new Date(pageData[i].reqdate);
         var value = new Date(dxs.getFullYear(), dxs.getMonth(), dxs.getDate(), 0, 0, sxs, 0);  //转换为Date对象
         pageData[i].datediff = utils.getDateDiff(value);
-
+        
+        var viewcount = pageData[i].viewcount;
+        if (viewcount >= 10000) {
+          viewcount = parseFloat(viewcount / 10000).toFixed(1) + '万';
+          pageData[i].viewcount = viewcount;
+        }
       }
 
       _this.setData({
@@ -179,7 +177,6 @@ Page({
         lastid: result.lastid
       });
 
-      _this.setData({ pageShow: 'block' });
     }, null, () => {
       _this.setData({ loading: false });
       wx.stopPullDownRefresh();
@@ -193,8 +190,6 @@ Page({
     });
     //根据宝宝生日计算成长天数babyDateStr - babydate
 
-
-
   },
 
   //列表加载更多
@@ -203,10 +198,8 @@ Page({
       console.log('loadingMoreEvent');
     }
     var _this = this;
+
     if (_this.data.loadingMore) return;
-
-    // console.log(this.data.currentDate);
-
 
     // var date = new Date(Date.parse(this.data.currentDate) - 1000 * 60 * 60 * 24);
     // var _this = this;
@@ -234,7 +227,7 @@ Page({
       if (result.countList != null && result.countList.length >= 2) {
         let n_reqdate = result.countList[result.countList.length - 1].reqdate;
         if (babydate != n_reqdate) {
-          pageData.push({ readtype: '3', picList: [''], content: '时间：' + n_reqdate });
+          pageData.push({ readtype: '3', picList: [''], content: '今日必读：' + n_reqdate });
         }
         _this.setData({
           reqdate: n_reqdate
@@ -255,6 +248,12 @@ Page({
         var dxs = new Date(pageData[i].reqdate);
         var value = new Date(dxs.getFullYear(), dxs.getMonth(), dxs.getDate(), 0, 0, sxs, 0);  //转换为Date对象
         pageData[i].datediff = utils.getDateDiff(value);
+
+        var viewcount = pageData[i].viewcount;
+        if (viewcount >= 10000) {
+          viewcount = parseFloat(viewcount / 10000).toFixed(1) + '万';
+          pageData[i].viewcount = viewcount;
+        }
       }
 
       _this.setData({
@@ -266,19 +265,6 @@ Page({
       _this.setData({ loadingMore: false });
     });
 
-
-
-    // requests.getBeforeNews(dateStr, (data) => {
-    //   data = utils.correctData(data);
-    //   console.log(data);
-    //   pageData = _this.data.pageData;
-    //   pageData.push({ type: '3', title: ([y, m, d].join('.') + '  星期' + weekdayStr[date.getDay()]) });
-    //   pageData = pageData.concat(data.stories);
-
-    //   _this.setData({ currentDate: date, pageData: pageData });
-    // }, null, () => {
-    //   _this.setData({ loadingMore: false });
-    // });
   },
 
   //浮动球移动事件
@@ -297,7 +283,11 @@ Page({
   //     ballRight: x
   //   });
   // },
-
+  toSettingPage: function (e) {
+    wx.navigateTo({
+      url: '../setting/setting'
+    });
+  },
   toDetailPage: function (e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
@@ -310,89 +300,7 @@ Page({
       url: '../activity/activity?id=' + id
     });
   },
-  // toSettingPage: function () {
-  //   wx.navigateTo({
-  //     url: '../setting/setting'
-  //   });
-  // },
-  //toCollectPage: function() {
-  //  wx.redirectTo( {
-  //    url: '../collect/collect'
-  //  });
-  //},
 
-  // toHomePage: function (e) {
-  //   var _this = this;
-  //   _this.setData({ loading: true, themeId: 0 });
-  //   console.log('themeId', _this.data.themeId);
-  //   requests.getNewsLatest((data) => {
-  //     data = utils.correctData(data);
-  //     console.log(data);
-  //     _this.setData({
-  //       sliderData: data.top_stories,
-  //       pageData: data.stories
-  //     });
-  //     slideDown.call(this);
-  //     _this.setData({ pageShow: 'block' });
-  //   }, null, () => {
-  //     _this.setData({ loading: false });
-  //   });
-  // },
-
-  // toThemePage: function (e) {
-  //   var _this = this;
-  //   _this.setData({ loading: true, themeId: e.currentTarget.dataset.id });
-  //   console.log('themeId', _this.data.themeId);
-  //   requests.getThemeStories(_this.data.themeId, (data) => {
-  //     //console.log(data);
-  //     data.background = data.background.replace("pic1.", "pic3.");
-  //     data.background = data.background.replace("pic2.", "pic3.");
-  //     for (var i = 0; i < data.editors.length; i++) {
-  //       data.editors[i].avatar = data.editors[i].avatar.replace("pic1.", "pic3.");
-  //       data.editors[i].avatar = data.editors[i].avatar.replace("pic2.", "pic3.");
-  //     }
-  //     data = utils.correctData(data);
-  //     console.log(data);
-  //     _this.setData({
-  //       pageData: data.stories,
-  //       background: data.background,
-  //       description: data.description,
-  //       editorData: data.editors
-  //     });
-  //     slideDown.call(this);
-  //     //wx.setNavigationBarTitle( { title: data.name }); //设置标题
-  //   }, null, () => {
-  //     _this.setData({ loading: false });
-  //   });
-  // },
-
-  // toCollectPage: function () {
-  //   var _this = this;
-  //   _this.setData({ themeId: -1 });
-  //   var pageData = wx.getStorageSync('pageData') || []
-  //   console.log(pageData);
-  //   _this.setData({
-  //     themeId: -1,
-  //     pageData: pageData
-  //   })
-  //   //_this.setData( {
-  //   //  pageData: data.stories,
-  //   //  background: data.background,
-  //   //  description: data.description,
-  //   //  editorData: data.editors
-  //   slideDown.call(this);
-  //   //wx.setNavigationBarTitle( { title: data.name }); //设置标题
-
-  // },
-  //toThemePage: function( e ) {
-  //  var themeId = e.currentTarget.dataset.id;
-  //  console.log( 'themeId', themeId );
-  //  wx.navigateTo( {
-  //    url: '../theme/theme?themeId=' + themeId
-  //  });
-  //},
-
-  //浮动球点击 侧栏展开
   ballClickEvent: function () {
     //slideUp.call(this);
     this.setData({ maskDisplay: 'block' });
@@ -404,6 +312,12 @@ Page({
     this.setData({ maskDisplay: 'none' });
   },
 
+  swiperChange: function (e) {
+    this.setData({
+      swiperCurrent: e.detail.current
+    })
+  },
+
   authorShowEvent: function () {
     this.setData({ modalMsgHidden: false });
   },
@@ -411,53 +325,18 @@ Page({
   modalMsgHiddenEvent: function () {
     this.setData({ modalMsgHidden: true });
   },
-  onClickMsgNo: function () {
-    wx.showModal({
-      title: '提示',
-      content: '功能暂未开放！',
-      showCancel: false,
-      success: function (res) {
-        if (res.confirm) {
-          // console.log('用户点击确定')
-        }
-      }
-    })
-  }
 
-  // onPullDownRefresh: function () {
-  //   //console.log('onPullDownRefresh', new Date())
-  //   this.onReady();
-  // },
-  // onReachBottom: function () {
-  //   //console.log('onReachBottom', new Date())
-  //   this.loadingMoreEvent();
-  // }
+  onPullDownRefresh: function () {
+    let _this = this;
+    _this.initLoadingData();
+  },
+  onReachBottom: function () {
+    let _this = this;
+    _this.loadingMoreEvent();
+  }
 });
 
-//侧栏展开
-function slideUp() {
-  console.log('slideUp');
-  var animation = wx.createAnimation({
-    duration: 300
-  });
-  this.setData({ maskDisplay: 'block' });
-  animation.translateX('100%').step();
-  this.setData({
-    slideAnimation: animation.export()
-  });
-}
 
-//侧栏关闭
-function slideDown() {
-  var animation = wx.createAnimation({
-    duration: 300
-  });
-  animation.translateX('-100%').step();
-  this.setData({
-    slideAnimation: animation.export()
-  });
-  this.setData({ maskDisplay: 'none' });
-}
 
 
 /**

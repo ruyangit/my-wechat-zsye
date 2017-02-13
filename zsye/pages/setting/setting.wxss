@@ -1,8 +1,40 @@
+.page__image-center {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  text-align: center;
+}
+
+.weui-select {
+  border-right: 0px;
+}
+
+.weui-cells::before {
+  border-top: 0px;
+}
+
+.weui-cells::after {
+  border-bottom: 0px;
+}
+
 .weui-media-box__thumb {
-  width: 92rpx;
-  height: 92rpx;
+  width: 200rpx;
+  height: 200rpx;
   border-radius: 10%;
 }
-.weui-media-box__bd{
-    margin-left: 35rpx;
+
+.weui-toptips-c {
+  position: fixed;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  z-index: 5000;
+  word-wrap: break-word;
+  word-break: break-all;
+  background-color: #9c9c9c;
 }

@@ -1,3 +1,39 @@
+.container {
+  background-color: #fff;
+  box-sizing: border-box;
+} 
+
+swiper-container{  
+  position: relative;  
+}  
+ 
+.swiper-container .swiper .img{  
+  width: 100%;  
+  height: 100%;  
+}  
+.swiper-container .dots{  
+  position: relative;  
+  left: 0;  
+  right: 0;  
+  bottom: 28rpx;  
+  display: flex;  
+  justify-content: center;  
+}  
+.swiper-container .dots .dot{  
+  margin: 0 8rpx;  
+  width: 14rpx;  
+  height: 14rpx;  
+  background: #fff;  
+  border-radius: 8rpx;  
+  transition: all .6s;  
+}  
+.swiper-container .dots .dot.active{  
+  width: 24rpx;  
+  background: #fff;  
+}
+
+
+
 .main-list-header .title, .main-list-header .date {
   display: inline-block;
   color: #fff;
@@ -53,7 +89,9 @@
   text-align: left;
   font-size: 14px;
 }
-
+.weui-media-box-m{
+  padding: 12px;
+}
 .weui-media-box {
   padding-right: 5px;
 }
@@ -67,12 +105,11 @@
   height: 60px;
   line-height: 60px;
 }
-
-.weui-media-box__hd_in-appmsg {
-  margin-right: 0;
-  width: 108px;
-  height: 60px;
-  line-height: 60px;
+.weui-panel::before{
+  border-top: 0px;
+}
+.weui-panel::after{
+  border-bottom: 0px;
 }
 
 .weui-media-box__desc_block {
@@ -91,23 +128,10 @@
 }
 
 .weui-grid__icon {
-  display: block;
-  width: 72px;
-  height: 72px;
-  margin: 0 auto;
-  border-radius: 10%;
+  width: 42px;
+  height: 42px;
+  position: relative;
+  top:10px;
+  left:6px;
 }
 
-.main-bottom-mk {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-}
-
-.main-bottom-mk-x {
-  width: 54px;
-  height: 54px;
-  margin: 0 auto;
-  display: block;
-}

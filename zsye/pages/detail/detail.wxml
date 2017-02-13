@@ -42,15 +42,15 @@
     <text>{{detail.subject}}</text>
   </view>
   <view style="padding-bottom: 150rpx;">
-    <view class="article">
+    <view class="article" style="padding-top: 10px;">
 
       <!--<view class="title" wx:if="{{item.subject && item.subject != ''}}">
                     <text>{{item.subject}}</text>
                 </view>-->
-      <view class="author-meta">
+      <view class="author-meta" style="font-size:12px;color:#DB408C">
 
         <!--<image wx:if="{{item.avatar && item.avatar != ''}}" class="avatar" src="{{item.avatar}}"></image>-->
-        <text>{{detail.sourcename}}</text>
+        <text>来源：</text><text>{{detail.sourcename}}</text>
         <!--<text> {{detail.datediff}}</text>-->
 
         <!--<text wx:if="{{item.bio && item.bio != ''}}" class="author-mark">{{item.bio}}</text>-->

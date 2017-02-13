@@ -1,20 +1,45 @@
-<view class="weui-panel weui-panel_access">
-  <view class="weui-panel__hd">账户信息</view>
-  <view class="weui-panel__bd">
-    <view class="weui-media-box weui-media-box_appmsg">
-      <view class="weui-media-box__hd">
-        <image class="weui-media-box__thumb" src="{{avatarUrl}}" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__image-center">
+    <image wx:if="{{babyAvatarUrl}}" class="weui-media-box__thumb" src="{{babyAvatarUrl}}"/>
+    <image wx:else class="weui-media-box__thumb" src="../../images/splash-logo.png"/>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips-c"  wx:if="{{showTopTips}}">请输入宝宝昵称</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">宝宝昵称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入宝宝昵称" value="{{babyNickName}}" bindinput="bindKeyInput" />
+        </view>
       </view>
-      <view class="weui-media-box__bd">
-        <view class="weui-media-box__title">微信号</view>
-        <view class="weui-media-box__desc">{{nickName}}</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">宝宝生日</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{babyDateValue}}" bindchange="bindDateChange">
+            <view class="weui-input">{{babyDateValue}}</view>
+          </picker>
+        </view>
       </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">宝宝性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindSexChange" value="{{babySexIndex}}" range="{{babySexNames}}" >
+            <view class="weui-select weui-select_in-select-after">{{babySexNames[babySexIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell"/>
+    </view>
+
+    <!--<view class="weui-cells__tips">底部说明文字底部说明文字</view>-->
+    <view class="weui-btn-area">
+      <button class="weui-btn m-bg" type="default"  bindtap="btnStart">确定</button>
     </view>
   </view>
-  <!--<view class="weui-panel__ft">
-    <navigator url="/pages/baby/setting/setting" open-type="redirect" class="weui-cell weui-cell_access weui-cell_link">
-      <view class="weui-cell__bd">查看更多</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </navigator>
-  </view>-->
 </view>
