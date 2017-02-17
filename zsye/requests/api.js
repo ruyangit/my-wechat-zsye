@@ -1,5 +1,5 @@
 const API_BASE = 'https://wx.zsye.com';
-//const API_BASE = 'http://121.41.40.118:20163';
+//const API_BASE = 'http://127.0.0.1:8080';
 const API_ACS = API_BASE + '/zhangy/servlet/ACSClientHttp';
 
 const def = {
@@ -88,6 +88,28 @@ const getTopStoryList = (babydate) => {
     }
     return getOptions(options);
 }
+const getActivityList = (babydate, viewtype) => {
+    var options = {
+        data: {
+            beanName: 'zhangyreadhttpservice',
+            methodName: 'getActivityList',
+            babydate: babydate,
+            viewtype: viewtype
+        }
+    }
+    return getOptions(options);
+}
+const getActivityInfo = (activityid) => {
+    var options = {
+        data: {
+            beanName: 'zhangyreadhttpservice',
+            methodName: 'getActivityInfo',
+            activityid: activityid,
+            isaddhtml: 0
+        }
+    }
+    return getOptions(options);
+}
 
 module.exports = {
     getBase,
@@ -95,5 +117,7 @@ module.exports = {
     getReadInfo,
     getCommentList,
     getRemindList,
-    getTopStoryList
+    getTopStoryList,
+    getActivityList,
+    getActivityInfo
 };

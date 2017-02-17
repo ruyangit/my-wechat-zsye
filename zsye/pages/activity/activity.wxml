@@ -1,7 +1,35 @@
-<view class="search-container">
+
+<!--<view class="search-container">
   <input type="text" bindinput="searchInputEvent" placeholder="搜索活动内容"></input><icon bindtap="searchClickEvent"  type="search" size="20"/>
+</view>-->
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view class="header-cover" wx:if="{{bpicurl}}">
+  <image mode="" style="width:100%;height:100%" src="https://wx.zsye.com/zhangy{{bpicurl}}"></image>
+  <view class="mask"></view>
+  <!--<view class="desc">
+    <text>{{detail.subject}}</text>
+  </view>-->
+  <text class="cover-source">http://www.zsye.com</text>
 </view>
+<view class="article">
+  <view class="title">
+    <text>{{detail.subject}}</text>
+  </view>
+  <!--<view class="author-info">
 
-<scroll-view scroll-y="true" >
-
-</scroll-view>
+    <image class="avatar" src="../../images/news.jpg"></image>
+    <text class="author-name">管理员</text>
+    <text class="author-mark">，SysUser</text>
+  </view>-->
+  <view class="content">
+    <view class="wxParse x-pd-15">
+      <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+    </view>
+  </view>
+  <!--<view class="discuss">
+    <navigator url="http://baidu.com">查看知乎讨论</navigator>
+  </view>-->
+</view>
+<loading hidden="{{!loading}}">
+  加载中...
+</loading>

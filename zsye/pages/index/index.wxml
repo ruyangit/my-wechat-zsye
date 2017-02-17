@@ -48,8 +48,8 @@
   <view class="swiper-container">
     <swiper autoplay="auto" interval="5000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
       <block wx:key="unique" wx:for="{{sliderData}}">
-        <swiper-item data-id="{{item.acskey}}" bindtap="toBannerPage">
-          <image mode="" src="{{item.picUrl}}" style="width:100%;height:100%;" />
+        <swiper-item data-id="{{item.acskey}}" data-bpicurl="{{item.bpicurl}}" bindtap="toBannerPage">
+          <image mode="" src="https://wx.zsye.com/zhangy{{item.bpicurl}}" style="width:100%;height:100%;" />
 
           <!--<view class="mask"></view>
         <view class="desc">

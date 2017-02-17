@@ -40,9 +40,9 @@ function requestData(options, successCallback, errorCallback, completeCallback) 
     });
 }
 //
-function getCommonJson(url, successCallback, errorCallback, completeCallback){
+function getCommonJson(url, successCallback, errorCallback, completeCallback) {
     var options = api.getBase({});
-    options.url = options.url+url;
+    options.url = options.url + url;
     requestData(options, successCallback, errorCallback, completeCallback);
 }
 
@@ -66,14 +66,20 @@ function getTopStoryList(babydate, successCallback, errorCallback, completeCallb
     requestData(api.getTopStoryList(babydate), successCallback, errorCallback, completeCallback);
 }
 
-
+function getActivityList(babydate, viewtype, successCallback, errorCallback, completeCallback) {
+    requestData(api.getActivityList(babydate, viewtype), successCallback, errorCallback, completeCallback);
+}
+function getActivityInfo(activityid, successCallback, errorCallback, completeCallback) {
+    requestData(api.getActivityInfo(activityid), successCallback, errorCallback, completeCallback);
+}
 
 module.exports = {
-    getCommonJson:getCommonJson,
+    getCommonJson: getCommonJson,
     getHomeList: getHomeList,
     getReadInfo: getReadInfo,
     getCommentList: getCommentList,
-    getRemindList:getRemindList,
-    getTopStoryList:getTopStoryList
-    
+    getRemindList: getRemindList,
+    getTopStoryList: getTopStoryList,
+    getActivityList: getActivityList,
+    getActivityInfo: getActivityInfo
 };

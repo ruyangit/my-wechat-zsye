@@ -12,6 +12,7 @@ var app = getApp();
 
 Page({
   data: {
+
     sliderData: [], //轮播图数据
     swiperCurrent: 0,
     currentDateStr: '',
@@ -114,13 +115,15 @@ Page({
     var date = utils.getCurrentData();
     this.setData({ currentDateStr: '今天' + date.month + '月' + date.day + '日' });
 
-    //请求banner信息
-    requests.getCommonJson("/wxsmall/common.json", (data) => {
-      // console.log(data);sliderData
-      _this.setData({
-        sliderData: data
-      });
-    });
+    // //请求banner信息
+
+
+    // requests.getCommonJson("/wxsmall/common.json", (data) => {
+    //   // console.log(data);sliderData
+    //   _this.setData({
+    //     sliderData: data
+    //   });
+    // });
 
 
     var babyData = app.globalData.babySetting;
@@ -138,6 +141,14 @@ Page({
     let babydate = _this.data.babydate;
     let babysex = _this.data.babysex;
 
+    requests.getActivityList(babydate, 3, (data) => {
+      var result = data.result;
+      console.log(result);//sliderData
+      _this.setData({
+        sliderData: result.activityList
+      });
+      console.log(_this.data.sliderData);
+    });
 
     requests.getHomeList(lastid, reqdate, babydate, babysex, (data) => {
 
@@ -164,7 +175,7 @@ Page({
         var dxs = new Date(pageData[i].reqdate);
         var value = new Date(dxs.getFullYear(), dxs.getMonth(), dxs.getDate(), 0, 0, sxs, 0);  //转换为Date对象
         pageData[i].datediff = utils.getDateDiff(value);
-        
+
         var viewcount = pageData[i].viewcount;
         if (viewcount >= 10000) {
           viewcount = parseFloat(viewcount / 10000).toFixed(1) + '万';
@@ -296,8 +307,9 @@ Page({
   },
   toBannerPage: function (e) {
     var id = e.currentTarget.dataset.id;
+    var bpicurl = e.currentTarget.dataset.bpicurl;
     wx.navigateTo({
-      url: '../activity/activity?id=' + id
+      url: '../activity/activity?id=' + id + '&bpicurl=' + bpicurl
     });
   },
 
